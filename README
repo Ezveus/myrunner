@@ -1,0 +1,40 @@
+Version 2.0:
+	- Complete reboot of the project.
+	- Version 2.0 is as developped as the older version (1.1.1) without the
+	translations.
+	- Improvements to come :
+		-> Translations in french and german
+		-> Capacity to set an internal path for the programm.
+		-> Capacity to set aliases like in a shell.
+
+--------------------------------------------------------------------------------
+
+Older versions :
+________________
+Version 1.1.1:
+	- Use of a QGridLayout to place the objects.
+	- This programm is now in english, in french and in german.
+
+Version 1.1.0 :
+	- Click in the input line erase the text.
+	- You can now valid your input using the 'Enter'/'Return' touch.
+
+Version 1.0.2 :
+	- Use of a Qt Ressource File : the programm can now use graphical
+	resources without to need the "rsrcs" directory.
+
+Version 1.0.1 :
+	- Correction of a bug : PushButtons and LineEdit are now clickable.
+
+Version 1.0 :
+	- The programm works.
+	- Improvements will come later.
+	- Translation into french and german will come later.
+
+Version 0.1 :
+	- The GUI is almost finished. The icon for the programm is missing, like
+	a little picture next to the input field.
+	- We can quit thanks to the button quit, to the cross and to the key
+	shortcut "Alt + q" which click on the button for us.
+	- Next step : connect the button and the menus to right slots.
+	- Last step : Launch a command or print an error message.
