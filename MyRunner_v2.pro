@@ -29,8 +29,8 @@ TARGET = MyRunner_v2
 DEPENDPATH += . ./src ./class
 INCLUDEPATH += . ./hdr
 
-HEADERS += ./hdr/MyRunner_v2.hpp ./hdr/Runner.hpp
-SOURCES += main.cpp Runner.cpp
+HEADERS += ./hdr/MyRunner_v2.hpp ./hdr/Runner.hpp ./hdr/Runner_options.hpp
+SOURCES += main.cpp Runner.cpp Runner_options.cpp
 #RESOURCES += ./rsrcs/rsrcs.qrc
 
 OBJECTS_DIR = ./output

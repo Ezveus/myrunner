@@ -1,10 +1,10 @@
 //
-// Runner.hpp for project MyRunner_v2
+// Runner_options.hpp for project MyRunner_v2
 // 
 // Made by Matthieu Ciappara
 // Mail : <ciappam@gmail.com>
 // 
-// Started by Matthieu Ciappara on Thu Apr 14 16:22:07 2011
+// Started by Matthieu Ciappara on Thu Jun  9 22:12:26 2011
 //
 
 //
@@ -29,28 +29,28 @@
 #include	<QLineEdit>
 #include	<QGridLayout>
 #include	<QDialog>
-#include	"Runner_options.hpp"
 
-#ifndef		RUNNER_HPP_
-# define	RUNNER_HPP_
+#ifndef		RUNNER_OPTIONS_HPP_
+# define	RUNNER_OPTIONS_HPP_
 
-class Runner : public QDialog
+class R_options : public QDialog
 {
   Q_OBJECT
 public:
-		Runner();
+		R_options();
 
 public slots:
-  void		run();
-  void		options();
+  void		about();
+  // int		add_alias();
+  // int		rm_alias();
 
 private:
-  QPushButton	*apb_run;
-  QPushButton	*apb_cancel;
-  QPushButton	*apb_options;
-  QLineEdit	*ale_input;
   QGridLayout	*agw_grid;
-  R_options	*aro_options;
+  QPushButton	*apb_about;
+  QLineEdit	*ale_alias;
+  QPushButton	*apb_add;
+  QPushButton	*apb_rm;
+  QPushButton	*apb_close;
 };
 
-#endif		// !RUNNER_HPP_
+#endif		// !RUNNER_OPTIONS_HPP_
