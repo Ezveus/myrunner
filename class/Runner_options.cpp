@@ -34,10 +34,12 @@ R_options::R_options()
   apb_about = new QPushButton(tr("&About..."));
   connect(apb_about, SIGNAL(clicked()), this, SLOT(about()));
   ale_alias = new QLineEdit;
-  apb_add = new QPushButton(tr("A&dd..."));
-  //  connect(apb_add, SIGNAL(clicked()), this, SLOT(add_alias()));
-  apb_rm = new QPushButton(tr("&Remove..."));
-  //  connect(apb_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
+  apb_alias_add = new QPushButton(tr("A&dd..."));
+  //  connect(apb_alias_add, SIGNAL(clicked()), this, SLOT(add_alias()));
+  apb_alias_show = new QPushButton(tr("&Show..."));
+  //  connect(apb_alias_show, SIGNAL(clicked()), this, SLOT(show_alias()));
+  apb_alias_rm = new QPushButton(tr("&Remove..."));
+  //  connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
   apb_close = new QPushButton(tr("&Close..."));
   connect(apb_close, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -46,10 +48,11 @@ R_options::R_options()
   ale_alias->setPlaceholderText(tr("Alias='Command'"));
 
   agw_grid->addWidget(ale_alias, 0, 0, 1, 3);
-  agw_grid->addWidget(apb_add, 1, 0);
-  agw_grid->addWidget(apb_about, 2, 1);
-  agw_grid->addWidget(apb_rm, 1, 2);
-  agw_grid->addWidget(apb_close, 3, 1);
+  agw_grid->addWidget(apb_alias_add, 1, 0);
+  agw_grid->addWidget(apb_alias_show, 1, 1);
+  agw_grid->addWidget(apb_about, 2, 0);
+  agw_grid->addWidget(apb_alias_rm, 1, 2);
+  agw_grid->addWidget(apb_close, 2, 2);
   this->setLayout(agw_grid);
 }
 

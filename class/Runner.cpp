@@ -27,6 +27,7 @@
 #include	<QProcess>
 #include	<QApplication>
 #include	<QMessageBox>
+#include	<QTextStream>
 #include	"Runner.hpp"
 
 Runner::Runner()
@@ -41,6 +42,8 @@ Runner::Runner()
   agw_grid = new QGridLayout;
   aro_options = new R_options;
   aro_options->setModal(true);
+  afl_alias = new QFile("~/.config/MyRunner_v2/aliases");
+  als_alias = new QList<QString>;
 
   setWindowTitle("MyRunner_v2");
 

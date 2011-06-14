@@ -29,6 +29,8 @@
 #include	<QLineEdit>
 #include	<QGridLayout>
 #include	<QDialog>
+#include	<QFile>
+#include	<QList>
 
 #ifndef		RUNNER_OPTIONS_HPP_
 # define	RUNNER_OPTIONS_HPP_
@@ -47,10 +49,14 @@ public slots:
 private:
   QGridLayout	*agw_grid;
   QPushButton	*apb_about;
-  QLineEdit	*ale_alias;
-  QPushButton	*apb_add;
-  QPushButton	*apb_rm;
   QPushButton	*apb_close;
+  QPushButton	*apb_alias_add;
+  QPushButton	*apb_alias_rm;
+  QPushButton	*apb_alias_show;
+  QLineEdit	*ale_alias;
+  // QFile		*afl_alias;
+  // QTextStream	*ats_alias;
+  // QList<QString>	*als_alias;
 };
 
 #endif		// !RUNNER_OPTIONS_HPP_

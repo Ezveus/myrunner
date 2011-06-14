@@ -29,6 +29,8 @@
 #include	<QLineEdit>
 #include	<QGridLayout>
 #include	<QDialog>
+#include	<QFile>
+#include	<QList>
 #include	"Runner_options.hpp"
 
 #ifndef		RUNNER_HPP_
@@ -51,6 +53,8 @@ private:
   QLineEdit	*ale_input;
   QGridLayout	*agw_grid;
   R_options	*aro_options;
+  QFile		*afl_alias;
+  QList<QString>	*als_alias;
 };
 
 #endif		// !RUNNER_HPP_
