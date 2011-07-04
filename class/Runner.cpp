@@ -28,6 +28,7 @@
 #include	<QApplication>
 #include	<QMessageBox>
 #include	<QTextStream>
+#include	<cstdlib>
 #include	"Runner.hpp"
 
 Runner::Runner()
@@ -42,7 +43,7 @@ Runner::Runner()
   agw_grid = new QGridLayout;
   aro_options = new R_options;
   aro_options->setModal(true);
-  afl_alias = new QFile("~/.config/MyRunner_v2/aliases");
+  afl_alias = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
   als_alias = new QList<QString>;
 
   setWindowTitle("MyRunner_v2");
@@ -55,12 +56,16 @@ Runner::Runner()
   agw_grid->addWidget(apb_options, 1, 0, 1, 1);
 
   this->setLayout(agw_grid);
+  fill_aliases(afl_alias, als_alias);
 }
 
 void	Runner::run()
 {
   if (!QProcess::startDetached(ale_input->text()))
-    QMessageBox::critical(this, tr("Error"), tr("This programm can't be launched<br/>Maybe, it is not installed."));
+    if (!search_aliases(ale_input->text()))
+      QMessageBox::critical(this, tr("Error"), tr("The programm ") + ale_input->text() + tr(" can't be found."));
+    else
+      this->close();
   else
     this->close();
 }
@@ -68,4 +73,29 @@ void	Runner::run()
 void	Runner::options()
 {
   aro_options->show();
+}
+
+void	Runner::fill_aliases(QFile *fl_alias, QList<QString> *ls_alias)
+{
+  QTextStream	ts_alias(fl_alias);
+
+  if (!fl_alias->open(QIODevice::ReadOnly))
+    qWarning("%s\n", E_AL_OPEN);
+  else
+    {
+      while (!ts_alias.atEnd())
+	ls_alias->append(ts_alias.readLine());
+      fl_alias->close();
+    }
+}
+
+int	Runner::search_aliases(QString prog)
+{
+  for (int i = 0; i < als_alias->size(); i++)
+    {
+      if (als_alias->at(i).at(0) != '#' &&
+	  prog == als_alias->at(i).section('=', 0, 0))
+	return(QProcess::startDetached(als_alias->at(i).section('=', 1)));
+    }
+  return (0);
 }

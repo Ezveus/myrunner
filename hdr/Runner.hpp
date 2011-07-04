@@ -31,6 +31,8 @@
 #include	<QDialog>
 #include	<QFile>
 #include	<QList>
+#include	<QString>
+#include	"MyRunner_v2.hpp"
 #include	"Runner_options.hpp"
 
 #ifndef		RUNNER_HPP_
@@ -41,6 +43,8 @@ class Runner : public QDialog
   Q_OBJECT
 public:
 		Runner();
+  static void	fill_aliases(QFile *, QList<QString> *);
+  int		search_aliases(QString);
 
 public slots:
   void		run();

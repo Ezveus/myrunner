@@ -24,7 +24,9 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 //
 
-#ifndef MYRUNNER_V2_HPP_
-# define MYRUNNER_V2_HPP_
+#ifndef		MYRUNNER_V2_HPP_
+# define	MYRUNNER_V2_HPP_
 
-#endif // MYRUNNER_V2_HPP_
+#define		E_AL_OPEN	"Can't open aliases list"
+
+#endif		// !MYRUNNER_V2_HPP_
