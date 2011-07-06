@@ -1,10 +1,10 @@
 //
-// Runner_options.hpp for project MyRunner_v2
+// Runner_show_alias.hpp for project MyRunner_v2
 // 
 // Made by Matthieu Ciappara
 // Mail : <ciappam@gmail.com>
 // 
-// Started by Matthieu Ciappara on Thu Jun  9 22:12:26 2011
+// Started by Matthieu Ciappara on Wed Jul  6 21:59:36 2011
 //
 
 //
@@ -25,39 +25,30 @@
 //
 
 #include	<QObject>
-#include	<QPushButton>
-#include	<QLineEdit>
-#include	<QGridLayout>
 #include	<QDialog>
-#include	<QFile>
-#include	<QList>
-#include	"Runner_show_alias.hpp"
+#include	<QTextEdit>
+#include	<QPushButton>
+#include	<QGridLayout>
 
-#ifndef		RUNNER_OPTIONS_HPP_
-# define	RUNNER_OPTIONS_HPP_
+#ifndef		RUNNER_SHOW_ALIASES_HPP_
+# define	RUNNER_SHOW_ALIASES_HPP_
 
-class R_options : public QDialog
+class R_show_aliases : public QDialog
 {
   Q_OBJECT
 public:
-		R_options();
-
-public slots:
-  void		about();
-  // int		add_alias();
-  // int		rm_alias();
-  void		show_alias();
+		R_show_aliases();
+		R_show_aliases(QString);
+		R_show_aliases(char *);
+  void		setText(QString);
+  void		setText(char *);
+  void		setReadOnly(bool
+);
 
 private:
-  QGridLayout	*agw_grid;
-  QPushButton	*apb_about;
+  QTextEdit	*ate_alias_file;
   QPushButton	*apb_close;
-  QPushButton	*apb_alias_add;
-  QPushButton	*apb_alias_rm;
-  QPushButton	*apb_alias_show;
-  QLineEdit	*ale_alias;
-  QFile		*afl_alias;
-  R_show_aliases	*arsa_show_alias;
+  QGridLayout	*agw_grid;
 };
 
-#endif		// !RUNNER_OPTIONS_HPP_
+#endif		// RUNNER_SHOW_ALIASES_HPP_

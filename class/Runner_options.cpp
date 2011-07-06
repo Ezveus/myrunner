@@ -26,6 +26,7 @@
 
 #include	<QMessageBox>
 #include	<QApplication>
+#include	<QTextEdit>
 #include	"Runner_options.hpp"
 
 R_options::R_options()
@@ -37,11 +38,15 @@ R_options::R_options()
   apb_alias_add = new QPushButton(tr("A&dd..."));
   //  connect(apb_alias_add, SIGNAL(clicked()), this, SLOT(add_alias()));
   apb_alias_show = new QPushButton(tr("&Show..."));
-  //  connect(apb_alias_show, SIGNAL(clicked()), this, SLOT(show_alias()));
+  connect(apb_alias_show, SIGNAL(clicked()), this, SLOT(show_alias()));
   apb_alias_rm = new QPushButton(tr("&Remove..."));
   //  connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
   apb_close = new QPushButton(tr("&Close..."));
   connect(apb_close, SIGNAL(clicked()), this, SLOT(close()));
+  afl_alias = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
+  arsa_show_alias = new R_show_aliases;
+  arsa_show_alias->setModal(true);
+  arsa_show_alias->setReadOnly(true);
 
   setWindowTitle(tr("Options of MyRunner_v2"));
 
@@ -61,3 +66,14 @@ void	R_options::about()
   QMessageBox::information(this, QObject::tr("About MyRunner_v2"), QObject::tr("MyRunner_v2<br/>This programm was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
 }
 
+void			R_options::show_alias()
+{
+  if (afl_alias->open(QIODevice::ReadOnly))
+    {
+      arsa_show_alias->setText(QString(afl_alias->readAll()));
+      afl_alias->close();
+      arsa_show_alias->show();
+    }
+  else
+    QMessageBox::critical(this, tr("Error"), tr("No aliases were defined."));
+}
