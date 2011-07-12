@@ -72,7 +72,7 @@ void	R_options::about()
   QMessageBox::information(this, QObject::tr("About MyRunner_v2"), QObject::tr("MyRunner_v2<br/>This programm was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
 }
 
-void			R_options::show_alias()
+void		R_options::show_alias()
 {
   if (afl_alias->open(QIODevice::ReadOnly))
     {
@@ -113,12 +113,14 @@ void		R_options::add_alias()
       QTextStream	ts(afl_alias);
 
       qWarning("File opened in append mode");
-      if (ale_alias->text().contains(QRegExp(".=.")))
+      if (ale_alias->text().contains(QRegExp(".=.")) || ale_alias->text().startsWith('#'))
 	{
 	  ts << ale_alias->text();
 	  ts << "\n";
 	  qWarning("Alias wrotten : \"%s\"", qPrintable(ale_alias->text()));
 	}
+      else
+	QMessageBox::information(this, tr("Syntax Error"), tr("syntax is :<br />alias=command"));
       ale_alias->setText("");
       afl_alias->close();
       qWarning("File closed\n");

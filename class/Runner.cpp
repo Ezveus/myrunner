@@ -28,6 +28,7 @@
 #include	<QApplication>
 #include	<QMessageBox>
 #include	<QTextStream>
+#include	<QRegExp>
 #include	<cstdlib>
 #include	"Runner.hpp"
 
@@ -76,16 +77,21 @@ void	Runner::options()
   aro_options->show();
 }
 
-void	Runner::fill_aliases(QFile *fl_alias, QList<QString> *ls_alias)
+void		Runner::fill_aliases(QFile *fl_alias, QList<QString> *ls_alias)
 {
   QTextStream	ts_alias(fl_alias);
+  QString	tmp;
 
   if (!fl_alias->open(QIODevice::ReadOnly))
     qWarning("%s\n", E_AL_OPEN);
   else
     {
       while (!ts_alias.atEnd())
-	ls_alias->append(ts_alias.readLine());
+	{
+	  tmp = ts_alias.readLine();
+	  if (!tmp.startsWith('#') && tmp.contains(QRegExp(".=.")))
+	    ls_alias->append(tmp);
+	}
       fl_alias->close();
     }
 }
@@ -94,8 +100,7 @@ int	Runner::search_aliases(QString prog)
 {
   for (int i = 0; i < als_alias->size(); i++)
     {
-      if (als_alias->at(i).at(0) != '#' &&
-	  prog == als_alias->at(i).section('=', 0, 0))
+      if (als_alias->at(i).section('=', 0, 0) == prog)
 	return(QProcess::startDetached(als_alias->at(i).section('=', 1)));
     }
   return (0);
