@@ -27,7 +27,13 @@
 #include	<QMessageBox>
 #include	<QApplication>
 #include	<QTextEdit>
+#include	<QDir>
+#include	<QTextStream>
+#include	<QRegExp>
+#include	<cstdio>
 #include	"Runner_options.hpp"
+
+#define		AUTO_CREATED	"## This aliases file was automatically created by MyRunner_v2"
 
 R_options::R_options()
 {
@@ -36,7 +42,7 @@ R_options::R_options()
   connect(apb_about, SIGNAL(clicked()), this, SLOT(about()));
   ale_alias = new QLineEdit;
   apb_alias_add = new QPushButton(tr("A&dd..."));
-  //  connect(apb_alias_add, SIGNAL(clicked()), this, SLOT(add_alias()));
+  connect(apb_alias_add, SIGNAL(clicked()), this, SLOT(add_alias()));
   apb_alias_show = new QPushButton(tr("&Show..."));
   connect(apb_alias_show, SIGNAL(clicked()), this, SLOT(show_alias()));
   apb_alias_rm = new QPushButton(tr("&Remove..."));
@@ -50,7 +56,7 @@ R_options::R_options()
 
   setWindowTitle(tr("Options of MyRunner_v2"));
 
-  ale_alias->setPlaceholderText(tr("Alias='Command'"));
+  ale_alias->setPlaceholderText(tr("Alias='Command'")); //Not available with Qt 4.2
 
   agw_grid->addWidget(ale_alias, 0, 0, 1, 3);
   agw_grid->addWidget(apb_alias_add, 1, 0);
@@ -76,4 +82,47 @@ void			R_options::show_alias()
     }
   else
     QMessageBox::critical(this, tr("Error"), tr("No aliases were defined."));
+}
+
+void		R_options::add_alias()
+{
+  QString	dirpath(getenv("HOME"));
+  dirpath += "/.config/MyRunner_v2/";
+  QDir		dir(dirpath);
+
+  if (!dir.exists(dirpath))
+    {
+      if (!dir.mkpath(dirpath))
+	qWarning("Error : Can't create directory\n");
+    }
+  if (!afl_alias->exists())
+    {
+      FILE	*file = fopen(qPrintable(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases"), "w");
+      
+      if (!file)
+	qWarning("Can't create aliases file\n");
+      else
+	{
+	  fprintf(file, "%s\n", AUTO_CREATED);
+	  qWarning("File created\n");
+	  fclose(file);
+	}
+    }
+  if (afl_alias->open(QIODevice::Append))
+    {
+      QTextStream	ts(afl_alias);
+
+      qWarning("File opened in append mode");
+      if (ale_alias->text().contains(QRegExp(".=.")))
+	{
+	  ts << ale_alias->text();
+	  ts << "\n";
+	  qWarning("Alias wrotten : \"%s\"", qPrintable(ale_alias->text()));
+	}
+      ale_alias->setText("");
+      afl_alias->close();
+      qWarning("File closed\n");
+    }
+  else
+    QMessageBox::critical(this, tr("Error"), tr("Can't add alias."));
 }

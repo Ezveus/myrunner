@@ -48,7 +48,7 @@ Runner::Runner()
 
   setWindowTitle("MyRunner_v2");
 
-  ale_input->setPlaceholderText(tr("Enter a command here..."));
+  ale_input->setPlaceholderText(tr("Enter a command here...")); // Not available with Qt 4.2
 
   agw_grid->addWidget(ale_input, 0, 0, 1, 4);
   agw_grid->addWidget(apb_run, 1, 3, 1, 1);
@@ -61,6 +61,7 @@ Runner::Runner()
 
 void	Runner::run()
 {
+  fill_aliases(afl_alias, als_alias);
   if (!QProcess::startDetached(ale_input->text()))
     if (!search_aliases(ale_input->text()))
       QMessageBox::critical(this, tr("Error"), tr("The programm ") + ale_input->text() + tr(" can't be found."));

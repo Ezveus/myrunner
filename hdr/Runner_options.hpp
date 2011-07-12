@@ -44,8 +44,8 @@ public:
 
 public slots:
   void		about();
-  // int		add_alias();
-  // int		rm_alias();
+  void		add_alias();
+  //void		rm_alias();
   void		show_alias();
 
 private:
