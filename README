@@ -1,3 +1,13 @@
+Version 2.0.5:
+	- Aliases can be defined manually in the "~/.config/MyRunner_v2/aliases"
+	- Aliases are functionnal
+	- Aliases can be shown in the options of MyRunner_v2
+	- Improvements to come :
+		-> Translations in french and german
+		-> Capacity to set an internal path for the programm
+		-> Capacity to add and remove aliases automatically in the
+		programm
+
 Version 2.0:
 	- Complete reboot of the project.
 	- Version 2.0 is as developped as the older version (1.1.1) without the
