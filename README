@@ -1,3 +1,10 @@
+Version 2.1:
+	- Aliases can be added and removed automatically by the programm
+	- Improvements to come :
+		-> Translations in french and german
+		-> Capacity to set an internal path for the programm
+		-> Possibility to launch the programm from a terminal
+
 Version 2.0.5:
 	- Aliases can be defined manually in the "~/.config/MyRunner_v2/aliases"
 	- Aliases are functionnal

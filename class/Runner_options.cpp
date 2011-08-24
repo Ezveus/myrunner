@@ -46,7 +46,7 @@ R_options::R_options()
   apb_alias_show = new QPushButton(tr("&Show..."));
   connect(apb_alias_show, SIGNAL(clicked()), this, SLOT(show_alias()));
   apb_alias_rm = new QPushButton(tr("&Remove..."));
-  //  connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
+  connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
   apb_close = new QPushButton(tr("&Close..."));
   connect(apb_close, SIGNAL(clicked()), this, SLOT(close()));
   afl_alias = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
@@ -127,4 +127,32 @@ void		R_options::add_alias()
     }
   else
     QMessageBox::critical(this, tr("Error"), tr("Can't add alias."));
+}
+
+void		R_options::rm_alias()
+{
+  QTextStream	ts_alias(afl_alias);
+  QString	tmp;
+  QFile		*fl_alias_new = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases.tmp");
+  QTextStream	ts_alias_new(fl_alias_new);
+
+  if (!afl_alias->open(QIODevice::ReadOnly) || !fl_alias_new->open(QIODevice::WriteOnly))
+    qWarning("%s\n", E_AL_OPEN);
+  else
+    {
+      qWarning("Files opened in Read and Write modes.\n");
+      while (!ts_alias.atEnd())
+	{
+	  tmp = ts_alias.readLine();
+	  if (tmp.section('=', 0, 0) != ale_alias->text())
+	    {
+	      ts_alias_new << tmp;
+	      ts_alias_new << "\n";
+	    }
+	}
+      afl_alias->remove();
+      fl_alias_new->rename(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
+    }
+  ale_alias->setText("");
+  delete fl_alias_new;
 }

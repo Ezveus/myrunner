@@ -31,6 +31,7 @@
 #include	<QDialog>
 #include	<QFile>
 #include	<QList>
+#include	"MyRunner_v2.hpp"
 #include	"Runner_show_alias.hpp"
 
 #ifndef		RUNNER_OPTIONS_HPP_
@@ -45,7 +46,7 @@ public:
 public slots:
   void		about();
   void		add_alias();
-  //void		rm_alias();
+  void		rm_alias();
   void		show_alias();
 
 private:
