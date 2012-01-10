@@ -63,8 +63,8 @@ Runner::Runner()
 void	Runner::run()
 {
   fill_aliases(afl_alias, als_alias);
-  if (!search_aliases(ale_input->text()))
-    if (!QProcess::startDetached(ale_input->text()))
+  if (!QProcess::startDetached(ale_input->text()))
+    if (!search_aliases(ale_input->text()))
       QMessageBox::critical(this, tr("Error"), tr("The programm ") + ale_input->text() + tr(" can't be found."));
     else
       this->close();
