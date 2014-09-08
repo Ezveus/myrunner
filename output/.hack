@@ -1,1 +1,0 @@
-This file aims to make the git transfert possible for the output directory
