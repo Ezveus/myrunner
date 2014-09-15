@@ -50,7 +50,7 @@ R_options::R_options() {
 }
 
 void R_options::about() {
-    QMessageBox::information(this, QObject::tr("About MyRunner"), QObject::tr("MyRunner<br/>This programm was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
+    QMessageBox::information(this, QObject::tr("About MyRunner"), QObject::tr("MyRunner<br/>This software was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
 }
 
 void R_options::show_alias(){
