@@ -1,5 +1,5 @@
 //
-// runner.cpp for project MyRunner_v2
+// runner.cpp for project MyRunner
 //
 // Made by Matthieu Ciappara
 // Mail : <ciappam@gmail.com>
@@ -26,10 +26,10 @@ Runner::Runner() {
     agw_grid = new QGridLayout;
     aro_options = new R_options;
     aro_options->setModal(true);
-    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
+    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases");
     als_alias = new QList<QString>;
 
-    setWindowTitle("MyRunner_v2");
+    setWindowTitle("MyRunner");
 
     ale_input->setPlaceholderText(tr("Enter a command here...")); // Not available with Qt 4.2
 

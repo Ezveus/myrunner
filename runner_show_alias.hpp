@@ -1,5 +1,5 @@
 //
-// Runner_show_alias.hpp for project MyRunner_v2
+// Runner_show_alias.hpp for project MyRunner
 //
 // Made by Matthieu Ciappara
 // Mail : <ciappam@gmail.com>

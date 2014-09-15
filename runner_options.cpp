@@ -16,7 +16,7 @@
 #include <cstdio>
 #include "runner_options.hpp"
 
-#define AUTO_CREATED "## This aliases file was automatically created by MyRunner_v2"
+#define AUTO_CREATED "## This aliases file was automatically created by MyRunner"
 
 R_options::R_options() {
     agw_grid = new QGridLayout;
@@ -31,12 +31,12 @@ R_options::R_options() {
     connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
     apb_close = new QPushButton(tr("&Close..."));
     connect(apb_close, SIGNAL(clicked()), this, SLOT(close()));
-    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
+    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases");
     arsa_show_alias = new R_show_aliases;
     arsa_show_alias->setModal(true);
     arsa_show_alias->setReadOnly(true);
 
-    setWindowTitle(tr("Options of MyRunner_v2"));
+    setWindowTitle(tr("Options of MyRunner"));
 
     ale_alias->setPlaceholderText(tr("Alias='Command'")); //Not available with Qt 4.2
 
@@ -50,7 +50,7 @@ R_options::R_options() {
 }
 
 void R_options::about() {
-    QMessageBox::information(this, QObject::tr("About MyRunner_v2"), QObject::tr("MyRunner_v2<br/>This programm was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
+    QMessageBox::information(this, QObject::tr("About MyRunner"), QObject::tr("MyRunner<br/>This programm was created by M.Ciappara.<br/>See the SourceForge page for more informations."));
 }
 
 void R_options::show_alias(){
@@ -65,7 +65,7 @@ void R_options::show_alias(){
 
 void R_options::add_alias() {
     QString dirpath(getenv("HOME"));
-    dirpath += "/.config/MyRunner_v2/";
+    dirpath += "/.config/myrunner/";
     QDir dir(dirpath);
 
     if (!dir.exists(dirpath)) {
@@ -74,7 +74,7 @@ void R_options::add_alias() {
         }
     }
     if (!afl_alias->exists()) {
-        FILE *file = fopen(qPrintable(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases"), "w");
+        FILE *file = fopen(qPrintable(QString(getenv("HOME")) + "/.config/myrunner/aliases"), "w");
 
         if (!file) {
             qWarning("Can't create aliases file\n");
@@ -106,7 +106,7 @@ void R_options::add_alias() {
 void R_options::rm_alias() {
     QTextStream ts_alias(afl_alias);
     QString tmp;
-    QFile *fl_alias_new = new QFile(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases.tmp");
+    QFile *fl_alias_new = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases.tmp");
     QTextStream ts_alias_new(fl_alias_new);
 
     if (!afl_alias->open(QIODevice::ReadOnly) || !fl_alias_new->open(QIODevice::WriteOnly)) {
@@ -121,7 +121,7 @@ void R_options::rm_alias() {
             }
         }
         afl_alias->remove();
-        fl_alias_new->rename(QString(getenv("HOME")) + "/.config/MyRunner_v2/aliases");
+        fl_alias_new->rename(QString(getenv("HOME")) + "/.config/myrunner/aliases");
     }
     ale_alias->setText("");
     delete fl_alias_new;
