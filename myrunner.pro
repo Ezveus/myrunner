@@ -21,4 +21,19 @@ OBJECTS_DIR = ./output
 MOC_DIR = ./output
 RCC_DIR = ./output
 
+QMAKE_CXXFLAGS  += -W -Wall -std=c++11
+
+win32 {
+    DEFINES += WINDOWS_SYSTEM
+}
+
+unix {
+    DEFINES += UNIX_SYSTEM
+}
+
+debug {
+    DEFINES += DEBUG_VERSION
+    QMAKE_CXXFLAGS += -g2
+}
+
 ## EOF

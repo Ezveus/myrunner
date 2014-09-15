@@ -31,14 +31,14 @@ R_options::R_options() {
     connect(apb_alias_rm, SIGNAL(clicked()), this, SLOT(rm_alias()));
     apb_close = new QPushButton(tr("&Close..."));
     connect(apb_close, SIGNAL(clicked()), this, SLOT(close()));
-    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases");
+    afl_alias = new QFile(MyRunner::getConfigLocation() + "aliases");
     arsa_show_alias = new R_show_aliases;
     arsa_show_alias->setModal(true);
     arsa_show_alias->setReadOnly(true);
 
     setWindowTitle(tr("Options of MyRunner"));
 
-    ale_alias->setPlaceholderText(tr("Alias='Command'")); //Not available with Qt 4.2
+    ale_alias->setPlaceholderText(tr("alias='command'")); //Not available with Qt 4.2
 
     agw_grid->addWidget(ale_alias, 0, 0, 1, 3);
     agw_grid->addWidget(apb_alias_add, 1, 0);
@@ -64,8 +64,7 @@ void R_options::show_alias(){
 }
 
 void R_options::add_alias() {
-    QString dirpath(getenv("HOME"));
-    dirpath += "/.config/myrunner/";
+    QString dirpath = MyRunner::getConfigLocation();
     QDir dir(dirpath);
 
     if (!dir.exists(dirpath)) {
@@ -74,7 +73,7 @@ void R_options::add_alias() {
         }
     }
     if (!afl_alias->exists()) {
-        FILE *file = fopen(qPrintable(QString(getenv("HOME")) + "/.config/myrunner/aliases"), "w");
+        FILE *file = fopen(qPrintable(dirpath + "aliases"), "w");
 
         if (!file) {
             qWarning("Can't create aliases file\n");
@@ -106,7 +105,7 @@ void R_options::add_alias() {
 void R_options::rm_alias() {
     QTextStream ts_alias(afl_alias);
     QString tmp;
-    QFile *fl_alias_new = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases.tmp");
+    QFile *fl_alias_new = new QFile(MyRunner::getConfigLocation() + "aliases.tmp");
     QTextStream ts_alias_new(fl_alias_new);
 
     if (!afl_alias->open(QIODevice::ReadOnly) || !fl_alias_new->open(QIODevice::WriteOnly)) {
@@ -121,7 +120,7 @@ void R_options::rm_alias() {
             }
         }
         afl_alias->remove();
-        fl_alias_new->rename(QString(getenv("HOME")) + "/.config/myrunner/aliases");
+        fl_alias_new->rename(MyRunner::getConfigLocation() + "aliases");
     }
     ale_alias->setText("");
     delete fl_alias_new;

@@ -26,7 +26,7 @@ Runner::Runner() {
     agw_grid = new QGridLayout;
     aro_options = new R_options;
     aro_options->setModal(true);
-    afl_alias = new QFile(QString(getenv("HOME")) + "/.config/myrunner/aliases");
+    afl_alias = new QFile(MyRunner::getConfigLocation() + "aliases");
     als_alias = new QList<QString>;
 
     setWindowTitle("MyRunner");

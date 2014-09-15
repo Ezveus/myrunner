@@ -12,7 +12,13 @@
 #include <QTranslator>
 #include <QString>
 #include <QLocale>
+#include "myrunner.hpp"
 #include "runner.hpp"
+
+QString MyRunner::getConfigLocation() {
+    QString res = ROOT_CONFIG_DIR + "myrunner/";
+    return res;
+}
 
 int main(int argc, char **argv) {
     QApplication app(argc, argv);
